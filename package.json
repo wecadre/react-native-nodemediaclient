@@ -1,11 +1,11 @@
 {
   "name": "react-native-nodemediaclient",
-  "version": "0.1.13",
+  "version": "0.2.0",
   "description": "This project is the react-native packaging of NodeMediaClient-Android and NodeMediaClient-iOS SDK.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Mingliang Chen",
+  "author": "Chen Mingliang",
   "license": ""
 }
