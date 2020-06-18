@@ -23,11 +23,20 @@
   self = [super init];
   if(self) {
     _np = [[NodePlayer alloc] initWithLicense:[RCTNodeMediaClient license]];
+    [_np setNodePlayerDelegate:self];
     [_np setPlayerView:self];
     _autoplay = NO;
     _inputUrl = nil;
+    _onChange = nil;
   }
   return self;
+}
+
+-(void) onEventCallback:(nonnull id)sender event:(int)event msg:(nonnull NSString*)msg {
+    if (!_onChange) {
+        return;
+    }
+    _onChange(@{@"code": [NSNumber numberWithInteger:event], @"msg": msg});
 }
 
 - (void)setInputUrl:(NSString *)inputUrl {

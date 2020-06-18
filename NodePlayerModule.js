@@ -21,7 +21,7 @@ class NodePlayerView extends Component {
     if (!this.props.onStatus) {
       return;
     }
-    this.props.onStatus(event.nativeEvent.code, event.nativeEvent.message);
+    this.props.onStatus(event.nativeEvent.code, event.nativeEvent.msg);
   }
 
   pause() {

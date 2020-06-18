@@ -34,7 +34,7 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
             public void onEventCallback(NodePlayer nodePlayer, int i, String s) {
                 WritableMap event = Arguments.createMap();
                 event.putInt("code", i);
-                event.putString("message", s);
+                event.putString("msg", s);
                 ReactContext reactContext = (ReactContext) getContext();
                 reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
                         getId(),

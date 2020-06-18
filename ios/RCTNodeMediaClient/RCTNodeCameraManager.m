@@ -28,7 +28,7 @@ RCT_EXPORT_VIEW_PROPERTY(audio, NSDictionary);
 RCT_EXPORT_VIEW_PROPERTY(video, NSDictionary);
 RCT_EXPORT_VIEW_PROPERTY(denoise, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(smoothSkinLevel, int);
-RCT_EXPORT_VIEW_PROPERTY(onStatus, RCTDirectEventBlock)
+RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
 
 RCT_EXPORT_METHOD(startprev:(nonnull NSNumber *)reactTag)

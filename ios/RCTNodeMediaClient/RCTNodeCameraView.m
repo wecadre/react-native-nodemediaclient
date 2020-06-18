@@ -28,18 +28,16 @@
     _camera = nil;
     _audio = nil;
     _video = nil;
-    _onStatus = nil;
+    _onChange = nil;
   }
   return self;
 }
 
 -(void) onEventCallback:(nonnull id)sender event:(int)event msg:(nonnull NSString*)msg {
-    if (!_onStatus) {
+    if (!_onChange) {
         return;
     }
-    
-    NSLog(@"Calling _onStatus with event %i and msg %@", event, msg);
-    _onStatus(@{ @"msg": msg, @"event": [NSNumber numberWithInteger:event] });
+    _onChange(@{@"code": [NSNumber numberWithInteger:event], @"msg": msg});
 }
 
 -(void)setOutputUrl:(NSString *)outputUrl {
@@ -91,10 +89,6 @@
 - (void)setSmoothSkinLevel:(NSInteger)smoothSkinLevel {
   _smoothSkinLevel = smoothSkinLevel;
   [_np setBeautyLevel:smoothSkinLevel];
-}
-
-- (void)setOnStatus:(RCTDirectEventBlock)onStatus {
-    _onStatus = onStatus;
 }
 
 - (void)setFlashEnable:(BOOL)flashEnable {
