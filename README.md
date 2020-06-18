@@ -35,7 +35,7 @@ Open AwesomeProject/android/app/src/main/AndroidManifest.xml, Add
 ```
 
 ### iOS
-Oen AwesomeProject/ios/QLive/Info.plist , Add:
+Open AwesomeProject/ios/QLive/Info.plist , Add:
 ```
 <key>NSCameraUsageDescription</key>
 <string>AwesomeProject requires access to your phone’s camera.</string>
