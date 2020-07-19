@@ -25,6 +25,7 @@ RCT_EXPORT_VIEW_PROPERTY(bufferTime, int)
 RCT_EXPORT_VIEW_PROPERTY(maxBufferTime, int)
 RCT_EXPORT_VIEW_PROPERTY(autoplay, BOOL)
 RCT_EXPORT_VIEW_PROPERTY(scaleMode, NSString)
+RCT_EXPORT_VIEW_PROPERTY(cryptoKey, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
 RCT_EXPORT_METHOD(start:(nonnull NSNumber *)reactTag)

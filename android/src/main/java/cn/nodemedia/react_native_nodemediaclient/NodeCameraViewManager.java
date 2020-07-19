@@ -22,7 +22,7 @@ import javax.annotation.Nullable;
 
 public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
 
-    private static final int COMMAND_STARTPREV_ID =0;
+    private static final int COMMAND_STARTPREV_ID = 0;
     private static final String COMMAND_STARTPREV_NAME = "startprev";
     private static final int COMMAND_STOPPREV_ID = 1;
     private static final String COMMAND_STOPPREV_NAME = "stopprev";
@@ -34,6 +34,7 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     private static final String COMMAND_SWITCH_CAM_NAME = "switchCamera";
     private static final int COMMAND_SWITCH_FLASH_ID = 5;
     private static final String COMMAND_SWITCH_FLASH_NAME = "flashEnable";
+
     @Override
     public String getName() {
         return "RCTNodeCamera";
@@ -42,11 +43,7 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     @Override
     public Map getExportedCustomBubblingEventTypeConstants() {
         return MapBuilder.builder()
-                .put(
-                        "topChange",
-                        MapBuilder.of(
-                                "phasedRegistrationNames",
-                                MapBuilder.of("bubbled", "onStatus")))
+                .put("topChange", MapBuilder.of("phasedRegistrationNames", MapBuilder.of("bubbled", "onStatus")))
                 .build();
     }
 
@@ -66,28 +63,29 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
         view.setOutputUrl(outputUrl);
     }
 
-    @ReactProp(name="autopreview")
+    @ReactProp(name = "autopreview")
     public void setAutoPreview(RCTNodeCameraView view, @Nullable Boolean autoPreview) {
-        if(autoPreview == true) {
+        if (autoPreview == true) {
             view.audioPreview();
         } else {
             view.stopPrev();
         }
     }
 
-    @ReactProp(name="camera")
+    @ReactProp(name = "camera")
     public void setCameraParam(RCTNodeCameraView view, ReadableMap cameraParam) {
-        view.setCamera(cameraParam.getInt("cameraId"),cameraParam.getBoolean("cameraFrontMirror"));
+        view.setCamera(cameraParam.getInt("cameraId"), cameraParam.getBoolean("cameraFrontMirror"));
     }
 
     @ReactProp(name = "audio")
     public void setAudioParam(RCTNodeCameraView view, ReadableMap audioParam) {
-        view.setAudio(audioParam.getInt("bitrate"),audioParam.getInt("profile"),audioParam.getInt("samplerate"));
+        view.setAudio(audioParam.getInt("bitrate"), audioParam.getInt("profile"), audioParam.getInt("samplerate"));
     }
 
     @ReactProp(name = "video")
     public void setVideoParam(RCTNodeCameraView view, ReadableMap videoParam) {
-        view.setVideo(videoParam.getInt("preset"),videoParam.getInt("fps"),videoParam.getInt("bitrate"),videoParam.getInt("profile"),videoParam.getBoolean("videoFrontMirror"));
+        view.setVideo(videoParam.getInt("preset"), videoParam.getInt("fps"), videoParam.getInt("bitrate"),
+                videoParam.getInt("profile"), videoParam.getBoolean("videoFrontMirror"));
     }
 
     @ReactProp(name = "denoise")
@@ -100,17 +98,17 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
         view.setSmoothSkinLevel(level);
     }
 
+    @ReactProp(name = "cryptoKey")
+    public void setCryptoKey(RCTNodeCameraView view, @Nullable String cryptoKey) {
+        view.setCryptoKey(cryptoKey);
+    }
+
     @Nullable
     @Override
     public Map<String, Integer> getCommandsMap() {
-        return MapBuilder.of(
-                COMMAND_STARTPREV_NAME,COMMAND_STARTPREV_ID,
-                COMMAND_STOPPREV_NAME,COMMAND_STOPPREV_ID,
-                COMMAND_START_NAME,COMMAND_START_ID,
-                COMMAND_STOP_NAME,COMMAND_STOP_ID,
-                COMMAND_SWITCH_CAM_NAME,COMMAND_SWITCH_CAM_ID,
-                COMMAND_SWITCH_FLASH_NAME,COMMAND_SWITCH_FLASH_ID
-        );
+        return MapBuilder.of(COMMAND_STARTPREV_NAME, COMMAND_STARTPREV_ID, COMMAND_STOPPREV_NAME, COMMAND_STOPPREV_ID,
+                COMMAND_START_NAME, COMMAND_START_ID, COMMAND_STOP_NAME, COMMAND_STOP_ID, COMMAND_SWITCH_CAM_NAME,
+                COMMAND_SWITCH_CAM_ID, COMMAND_SWITCH_FLASH_NAME, COMMAND_SWITCH_FLASH_ID);
     }
 
     @Override

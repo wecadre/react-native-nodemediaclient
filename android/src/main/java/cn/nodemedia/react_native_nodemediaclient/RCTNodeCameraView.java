@@ -69,9 +69,11 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     public void setOutputUrl(String url) {
         mNodePublisher.setOutputUrl(url);
-
     }
 
+    public void setCryptoKey(String cryptoKey) {
+        mNodePublisher.setCryptoKey(cryptoKey);
+    }
 
     public void setCamera(int cameraId, boolean cameraFrontMirror) {
         this.cameraId = cameraId;

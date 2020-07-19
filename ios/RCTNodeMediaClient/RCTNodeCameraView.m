@@ -95,6 +95,10 @@
   [_np setFlashEnable:flashEnable];
 }
 
+-(void)setCryptoKey:(NSString *)cryptoKey {
+  [_np setCryptoKey:cryptoKey];
+}
+
 -(int)startprev {
   return [_np startPreview];
 }

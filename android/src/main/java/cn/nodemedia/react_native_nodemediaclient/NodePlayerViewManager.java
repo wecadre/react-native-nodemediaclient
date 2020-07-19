@@ -72,6 +72,11 @@ public class NodePlayerViewManager extends ViewGroupManager<RCTNodePlayerView> {
         }
     }
 
+    @ReactProp(name = "cryptoKey")
+    public void setCryptoKey(RCTNodePlayerView view, @Nullable String cryptoKey) {
+        view.setCryptoKey(cryptoKey);
+    }
+
     @Nullable
     @Override
     public Map<String, Integer> getCommandsMap() {

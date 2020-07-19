@@ -45,8 +45,6 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
         });
     }
 
-
-
     public void setInputUrl(String inputUrl) {
         mNodePlayer.setInputUrl(inputUrl);
         if(isAutoPlay) {
@@ -72,6 +70,9 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
         setRenderType(type);
     }
 
+    public void setCryptoKey(String key) {
+        mNodePlayer.setCryptoKey(key);
+    }
 
     public int pause() {
         return mNodePlayer.pause();

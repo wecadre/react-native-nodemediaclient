@@ -75,6 +75,10 @@
   }
 }
 
+-(void)setCryptoKey:(NSString *)cryptoKey {
+  [_np setCryptoKey:cryptoKey];
+}
+
 -(int)start {
   return [_np start];
 }

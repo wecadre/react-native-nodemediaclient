@@ -64,6 +64,7 @@ NodePlayerView.propTypes = {
   autoplay: PropTypes.bool,
   scaleMode: PropTypes.oneOf(['ScaleToFill', 'ScaleAspectFit', 'ScaleAspectFill']),
   renderType: PropTypes.oneOf(['SURFACEVIEW', 'TEXTUREVIEW']),
+  cryptoKey:PropTypes.string,
   onStatus: PropTypes.func,
   ...View.propTypes // 包含默认的View的属性
 };
