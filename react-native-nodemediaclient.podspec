@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
 
-  s.dependency "NodeMediaClient", '2.8.1'
+  s.dependency "NodeMediaClient", '2.8.2'
 
   s.default_subspec = "RCTNodeMediaClient"
 end
