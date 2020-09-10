@@ -62,6 +62,7 @@ NodePlayerView.propTypes = {
   bufferTime: PropTypes.number,
   maxBufferTime: PropTypes.number,
   autoplay: PropTypes.bool,
+  audioEnable: PropTypes.bool,
   scaleMode: PropTypes.oneOf(['ScaleToFill', 'ScaleAspectFit', 'ScaleAspectFill']),
   renderType: PropTypes.oneOf(['SURFACEVIEW', 'TEXTUREVIEW']),
   cryptoKey:PropTypes.string,

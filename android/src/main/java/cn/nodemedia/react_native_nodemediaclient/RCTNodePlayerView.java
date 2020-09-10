@@ -74,6 +74,10 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
         mNodePlayer.setCryptoKey(key);
     }
 
+    public void setAudioEnable(Boolean audioEnable){
+        mNodePlayer.setAudioEnable(audioEnable);
+    }
+
     public int pause() {
         return mNodePlayer.pause();
     }
