@@ -77,6 +77,11 @@ public class NodePlayerViewManager extends ViewGroupManager<RCTNodePlayerView> {
         view.setCryptoKey(cryptoKey);
     }
 
+    @ReactProp(name = "audioEnable")
+    public void setAudioEnable(RCTNodePlayerView view, Boolean audioEnable) {
+        view.setAudioEnable(audioEnable);
+    }
+
     @Nullable
     @Override
     public Map<String, Integer> getCommandsMap() {

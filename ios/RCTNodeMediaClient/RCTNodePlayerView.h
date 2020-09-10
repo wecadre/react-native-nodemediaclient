@@ -15,6 +15,7 @@
 @property (nonatomic) int bufferTime;
 @property (nonatomic) int maxBufferTime;
 @property (nonatomic) BOOL autoplay;
+@property (nonatomic) BOOL audioEnable;
 @property (strong, nonatomic) NSString *scaleMode;
 @property (strong, nonatomic) NSString *cryptoKey;
 @property (nonatomic, copy) RCTBubblingEventBlock onChange;

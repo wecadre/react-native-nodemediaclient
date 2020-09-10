@@ -26,6 +26,7 @@
     [_np setNodePlayerDelegate:self];
     [_np setPlayerView:self];
     _autoplay = NO;
+    _audioEnable = YES;
     _inputUrl = nil;
     _onChange = nil;
   }
@@ -73,6 +74,11 @@
   if(_inputUrl) {
     [_np start];
   }
+}
+
+- (void)setAudioEnable:(BOOL)audioEnable {
+  _audioEnable = audioEnable;
+  [_np setAudioEnable:audioEnable];
 }
 
 -(void)setCryptoKey:(NSString *)cryptoKey {
