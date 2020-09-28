@@ -93,6 +93,11 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
         view.setDenoise(denoise);
     }
 
+    @ReactProp(name = "dynamicRateEnable")
+    public void setDynamicRateEnable(RCTNodeCameraView view, boolean dynamicRateEnable) {
+        view.setDynamicRateEnable(dynamicRateEnable);
+    }
+
     @ReactProp(name = "smoothSkinLevel")
     public void setSmoothSkinLevel(RCTNodeCameraView view, int level) {
         view.setSmoothSkinLevel(level);

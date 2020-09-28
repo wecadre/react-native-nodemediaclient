@@ -24,6 +24,7 @@
     _np = [[NodePublisher alloc] initWithLicense:[RCTNodeMediaClient license]];
     [_np setNodePublisherDelegate:self];
     _autopreview = NO;
+    _dynamicRateEnable = YES;
     _outputUrl = nil;
     _camera = nil;
     _audio = nil;
@@ -84,6 +85,11 @@
 - (void)setDenoise:(BOOL)denoise {
   _denoise = denoise;
   [_np setDenoiseEnable:denoise];
+}
+
+- (void)setDynamicRateEnable:(BOOL)dynamicRateEnable {
+  _dynamicRateEnable = dynamicRateEnable;
+  [_np setDynamicRateEnable: YES];
 }
 
 - (void)setSmoothSkinLevel:(NSInteger)smoothSkinLevel {
