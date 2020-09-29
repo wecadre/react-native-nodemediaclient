@@ -89,7 +89,7 @@
 
 - (void)setDynamicRateEnable:(BOOL)dynamicRateEnable {
   _dynamicRateEnable = dynamicRateEnable;
-  [_np setDynamicRateEnable: YES];
+  [_np setDynamicRateEnable: dynamicRateEnable];
 }
 
 - (void)setSmoothSkinLevel:(NSInteger)smoothSkinLevel {
