@@ -99,7 +99,7 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     public void setDynamicRateEnable(boolean dynamicRateEnable) {
         this.dynamicRateEnable = dynamicRateEnable;
-        mNodePublisher.setDynamicRateEnable(dynamicRateEnable)
+        mNodePublisher.setDynamicRateEnable(dynamicRateEnable);
     }
 
     public void setSmoothSkinLevel(int smoothSkinLevel) {
