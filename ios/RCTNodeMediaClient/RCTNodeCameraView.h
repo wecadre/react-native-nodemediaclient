@@ -17,6 +17,7 @@
 @property (strong,nonatomic) NSDictionary *audio;
 @property (strong,nonatomic) NSDictionary *video;
 @property (nonatomic) BOOL denoise;
+@property (nonatomic) BOOL dynamicRateEnable;
 @property (nonatomic) NSInteger smoothSkinLevel;
 @property (strong, nonatomic) NSString *cryptoKey;
 @property (nonatomic, copy) RCTBubblingEventBlock onChange;

@@ -102,6 +102,7 @@ NodeCameraView.propTypes = {
   }),
   autopreview:PropTypes.bool,
   denoise: PropTypes.bool,
+  dynamicRateEnable: PropTypes.bool,
   smoothSkinLevel: PropTypes.oneOf([0, 1, 2, 3, 4, 5]),
   cryptoKey:PropTypes.string,
   onStatus: PropTypes.func,
