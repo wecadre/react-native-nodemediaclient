@@ -13,7 +13,7 @@ declare module "react-native-nodemediaclient" {
     dynamicRateEnable?: boolean;
     smoothSkinLevel?: SmoothSkinLevel;
     cryptoKey?: string;
-    onStatus?: Function;
+    onStatus?(code?: OutputStreamStatus, status?: string): any;
   }
 
   export interface NodeCameraViewType {
@@ -57,16 +57,22 @@ declare module "react-native-nodemediaclient" {
   type FPS = 15 | 20 | 24 | 30;
   type SmoothSkinLevel = 0 | 1 | 2 | 3 | 4 | 5;
 
-  export enum StreamStatus {
+  export enum OutputStreamStatus {
     Connecting = 2000,
     Start = 2001,
     Failed = 2002,
     Closed = 2004,
     None,
   }
-
+  export enum InputStreamStatus {
+    Connecting = 1000,
+    Connected = 1001,
+    Buffering = 1101,
+    BufferFull = 1102,
+    Resolution = 1104,
+  }
   export interface NodePlayerViewProps extends ViewProps {
-    ref:any;
+    ref: any;
     inputUrl: string;
     bufferTime?: number;
     maxBufferTime?: number;
@@ -75,7 +81,7 @@ declare module "react-native-nodemediaclient" {
     scaleMode?: "ScaleToFill" | "ScaleAspectFit" | "ScaleAspectFill";
     renderType?: "SURFACEVIEW" | "TEXTUREVIEW";
     cryptoKey?: string;
-    onStatus?(code?: StreamStatus): any;
+    onStatus?(code?: InputStreamStatus, status?: string): any;
   }
 
   export interface NodePlayerViewType {
@@ -87,7 +93,10 @@ declare module "react-native-nodemediaclient" {
     start(): any;
   }
 
-  export const NodePlayerView: React.ForwardRefRenderFunction<NodePlayerViewType, NodePlayerViewProps >;
+  export const NodePlayerView: React.ForwardRefRenderFunction<
+    NodePlayerViewType,
+    NodePlayerViewProps
+  >;
 
   export const NodeCameraView: React.ForwardRefRenderFunction<
     NodeCameraViewType,
