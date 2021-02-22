@@ -66,6 +66,7 @@ declare module "react-native-nodemediaclient" {
   }
 
   export interface NodePlayerViewProps extends ViewProps {
+    ref:any;
     inputUrl: string;
     bufferTime?: number;
     maxBufferTime?: number;
@@ -86,7 +87,7 @@ declare module "react-native-nodemediaclient" {
     start(): any;
   }
 
-  export const NodePlayerView: React.ForwardRefRenderFunction<any, any>;
+  export const NodePlayerView: React.ForwardRefRenderFunction<NodePlayerViewType, NodePlayerViewProps >;
 
   export const NodeCameraView: React.ForwardRefRenderFunction<
     NodeCameraViewType,

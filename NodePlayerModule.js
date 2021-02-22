@@ -8,10 +8,10 @@ import {
 const NodePlayerView = (props, ref) => {
   const playerRef = React.useRef();
   const _onChange = (event) => {
-    if (!this.props.onStatus) {
+    if (!props.onStatus) {
       return;
     }
-    this.props.onStatus(event.nativeEvent.code, event.nativeEvent.msg);
+    props.onStatus(event.nativeEvent.code, event.nativeEvent.msg);
   };
 
   const pause = () => {
