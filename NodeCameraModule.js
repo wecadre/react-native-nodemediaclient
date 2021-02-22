@@ -75,6 +75,12 @@ const NodeCameraView = (props, ref) => {
     [switchCamera, stop, start, flashEnable, startPreview, stopPreview]
   );
 
+  React.useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, []);
+
   return <RCTNodeCamera {...props} ref={videoRef} onChange={_onChange} />;
 };
 

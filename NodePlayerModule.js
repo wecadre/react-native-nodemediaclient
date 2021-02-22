@@ -43,6 +43,12 @@ const NodePlayerView = (props, ref) => {
     stop,
   ]);
 
+  React.useEffect(() => {
+    return () => {
+      stop();
+    };
+  }, []);
+
   return <RCTNodePlayer {...props} ref={playerRef} onChange={_onChange} />;
 };
 
