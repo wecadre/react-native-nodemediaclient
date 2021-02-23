@@ -62,15 +62,19 @@ declare module "react-native-nodemediaclient" {
     Start = 2001,
     Failed = 2002,
     Closed = 2004,
-    None,
+    None = 0,
   }
+
   export enum InputStreamStatus {
     Connecting = 1000,
     Connected = 1001,
+    Reconnection = 1003,
     Buffering = 1101,
     BufferFull = 1102,
     Resolution = 1104,
+    None = 0,
   }
+  
   export interface NodePlayerViewProps extends ViewProps {
     ref: any;
     inputUrl: string;

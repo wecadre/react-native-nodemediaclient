@@ -21,8 +21,10 @@ module.exports = {
   InputStreamStatus: {
     Connecting: 1000,
     Connected: 1001,
+    Reconnection: 1003,
     Buffering: 1101,
     BufferFull: 1102,
     Resolution: 1104,
+    None: 0,
   },
 };
