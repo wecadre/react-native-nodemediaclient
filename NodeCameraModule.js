@@ -16,51 +16,57 @@ const NodeCameraView = (props, ref) => {
   };
 
   const switchCamera = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(videoRef.current),
-      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.switchCamera,
-      null
-    );
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.switchCamera,
+        null
+      );
   };
 
   const flashEnable = (enable) => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(videoRef.current),
-      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.flashEnable,
-      [enable]
-    );
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.flashEnable,
+        [enable]
+      );
   };
 
   const startPreview = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(videoRef.current),
-      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.startprev,
-      null
-    );
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.startprev,
+        null
+      );
   };
 
   const stopPreview = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(videoRef.current),
-      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.stopprev,
-      null
-    );
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.stopprev,
+        null
+      );
   };
 
   const start = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(videoRef.current),
-      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.start,
-      null
-    );
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.start,
+        null
+      );
   };
 
   const stop = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(videoRef.current),
-      UIManager.getViewManagerConfig("RCTNodeCamera").Commands.stop,
-      null
-    );
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.stop,
+        null
+      );
   };
   React.useImperativeHandle(
     ref,

@@ -15,27 +15,30 @@ const NodePlayerView = (props, ref) => {
   };
 
   const pause = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(playerRef.current),
-      UIManager.RCTNodePlayer.Commands.pause,
-      null
-    );
+    if (playerRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(playerRef.current),
+        UIManager.RCTNodePlayer?.Commands?.pause,
+        null
+      );
   };
 
   const start = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(playerRef.current),
-      UIManager.RCTNodePlayer.Commands.start,
-      null
-    );
+    if (playerRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(playerRef.current),
+        UIManager.RCTNodePlayer?.Commands?.start,
+        null
+      );
   };
 
   const stop = () => {
-    UIManager.dispatchViewManagerCommand(
-      findNodeHandle(playerRef.current),
-      UIManager.RCTNodePlayer.Commands.stop,
-      null
-    );
+    if (playerRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(playerRef.current),
+        UIManager.RCTNodePlayer?.Commands?.stop,
+        null
+      );
   };
   React.useImperativeHandle(ref, () => ({ pause, start, stop }), [
     pause,
