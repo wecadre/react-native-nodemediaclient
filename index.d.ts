@@ -58,12 +58,18 @@ declare module "react-native-nodemediaclient" {
   type SmoothSkinLevel = 0 | 1 | 2 | 3 | 4 | 5;
 
   export enum OutputStreamStatus {
+    /** Connecting stream */
     Connecting = 2000,
+    /** Start Publishing */
     Start = 2001,
+    /** Connection Failed */
     Failed = 2002,
+    /** Connection Closed */
     Closed = 2004,
-    None = 0,
+    /** Publish network congestion */
+    Congestion = 2100,
   }
+
 
   export enum InputStreamStatus {
     Connecting = 1000,
