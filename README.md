@@ -8,10 +8,10 @@ Complete live publish and play functions, providing the exact same API call. You
 ## 0.Enter the project directory
 cd AwesomeProject
 
-## 1.install
+## 1.Install
 npm i react-native-nodemediaclient
 
-## 2.link
+## 2.Link
 ~~react-native link react-native-nodemediaclient~~
 >No longer needed after react native 0.60
 
