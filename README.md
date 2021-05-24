@@ -124,6 +124,12 @@ const requestCameraPermission = async () => {
 >In this demo you might have to boot it twice.
 In the official version, you can apply permission on the home page first, and then jump to the live page after you have permission.
 
+## Note for android
+If you have enabled progaurd in release don't forget to add this to `proguard-rules.pro` file:
+```
+-keep class cn.nodemedia.** {*;} 
+```
+
 ## Demo project
 ![img](https://raw.githubusercontent.com/NodeMedia/iShow-RN/master/1519740855033.gif)
 https://github.com/NodeMedia/iShow-RN
