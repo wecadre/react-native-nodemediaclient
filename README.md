@@ -9,7 +9,7 @@ Complete live publish and play functions, providing the exact same API call. You
 cd AwesomeProject
 
 ## 1.install
-yarn add react-native-nodemediaclient
+npm i react-native-nodemediaclient
 
 ## 2.link
 ~~react-native link react-native-nodemediaclient~~
