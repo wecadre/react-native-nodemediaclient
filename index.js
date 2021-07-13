@@ -16,6 +16,8 @@ module.exports = {
     Start: 2001,
     Failed: 2002,
     Closed: 2004,
+    Congestion: 2100,
+    Unobstructed: 2101,
     None: 0,
   },
   InputStreamStatus: {
