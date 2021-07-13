@@ -1,6 +1,6 @@
-declare module 'react-native-nodemediaclient' {
-  import type * as React from 'react';
-  import { ViewProps } from 'react-native';
+declare module "react-native-nodemediaclient" {
+  import type * as React from "react";
+  import { ViewProps } from "react-native";
 
   export interface NodeCameraViewProps extends ViewProps {
     ref?: any;
@@ -81,10 +81,10 @@ declare module 'react-native-nodemediaclient' {
 
   export interface CameraConfig {
     /** define front or back camera used to stream */
-    cameraId?: CameraId;
+    cameraId: CameraId;
 
     /** Define if front camera should mirror image for preview */
-    cameraFrontMirror?: boolean;
+    cameraFrontMirror: boolean;
   }
 
   /** Cameras */
@@ -108,46 +108,41 @@ declare module 'react-native-nodemediaclient' {
 
     /** Publish network congestion */
     Congestion = 2100,
+    Unobstructed = 2101,
   }
   /** Video sizes for 16x9 aspect ratio
    * @example 1080p is 1920x1080
    */
   export enum AR16X9 {
-    '270p' = 0,
-    '360p' = 1,
-    '480p' = 2,
-    '540p' = 3,
-    '720p' = 4,
-    '1080p' = 5,
+    "270p" = 0,
+    "360p" = 1,
+    "480p" = 2,
+    "540p" = 3,
+    "720p" = 4,
+    "1080p" = 5,
   }
   /** Video sizes for 4x3 aspect ratio
    * @example 1080p is 1440x1080
    */
   export enum AR4X3 {
-    '270p' = 10,
-    '360p' = 11,
-    '480p' = 12,
-    '540p' = 13,
-    '720p' = 14,
-    '1080p' = 15,
+    "270p" = 10,
+    "360p" = 11,
+    "480p" = 12,
+    "540p" = 13,
+    "720p" = 14,
+    "1080p" = 15,
   }
   /** Video sizes for 1x1 aspect ratio
    * @example 1080p is 1080x1080
    */
   export enum AR1X1 {
-    '270p' = 20,
-    '360p' = 21,
-    '480p' = 22,
-    '540p' = 23,
-    '720p' = 24,
-    '1080p' = 25,
+    "270p" = 20,
+    "360p" = 21,
+    "480p" = 22,
+    "540p" = 23,
+    "720p" = 24,
+    "1080p" = 25,
   }
-  /** Aspect ratios */
-  export type VideoAspectRatios = {
-    '16x9': AR16X9;
-    '4x3': AR4X3;
-    '1x1': AR1X1;
-  };
 
   /** Audio Quality profiles */
   export enum AudioProfiles {
@@ -183,8 +178,8 @@ declare module 'react-native-nodemediaclient' {
     maxBufferTime?: number;
     autoplay?: boolean;
     audioEnable?: boolean;
-    scaleMode?: 'ScaleToFill' | 'ScaleAspectFit' | 'ScaleAspectFill';
-    renderType?: 'SURFACEVIEW' | 'TEXTUREVIEW';
+    scaleMode?: "ScaleToFill" | "ScaleAspectFit" | "ScaleAspectFill";
+    renderType?: "SURFACEVIEW" | "TEXTUREVIEW";
     cryptoKey?: string;
     onStatus?(code?: InputStreamStatus, status?: string): any;
   }
@@ -198,7 +193,13 @@ declare module 'react-native-nodemediaclient' {
     start(): any;
   }
 
-  export const NodePlayerView: React.ForwardRefRenderFunction<NodePlayerViewType, NodePlayerViewProps>;
+  export const NodePlayerView: React.ForwardRefRenderFunction<
+    NodePlayerViewType,
+    NodePlayerViewProps
+  >;
 
-  export const NodeCameraView: React.ForwardRefRenderFunction<NodeCameraViewType, NodeCameraViewProps>;
+  export const NodeCameraView: React.ForwardRefRenderFunction<
+    NodeCameraViewType,
+    NodeCameraViewProps
+  >;
 }
