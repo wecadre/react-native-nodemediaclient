@@ -1,6 +1,6 @@
 {
   "name": "react-native-nodemediaclient",
-  "version": "0.2.17",
+  "version": "0.2.18",
   "description": "This project is the react-native packaging of NodeMediaClient-Android and NodeMediaClient-iOS SDK.",
   "main": "index.js",
   "scripts": {
