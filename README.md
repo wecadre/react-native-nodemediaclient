@@ -8,10 +8,10 @@ Complete live publish and play functions, providing the exact same API call. You
 ## 0.Enter the project directory
 cd AwesomeProject
 
-## 1.install
-yarn add react-native-nodemediaclient
+## 1.Install
+npm i react-native-nodemediaclient
 
-## 2.link
+## 2.Link
 ~~react-native link react-native-nodemediaclient~~
 >No longer needed after react native 0.60
 
@@ -123,6 +123,12 @@ const requestCameraPermission = async () => {
 
 >In this demo you might have to boot it twice.
 In the official version, you can apply permission on the home page first, and then jump to the live page after you have permission.
+
+## Note for android
+If you have enabled progaurd in release don't forget to add this to `proguard-rules.pro` file:
+```
+-keep class cn.nodemedia.** {*;} 
+```
 
 ## Demo project
 ![img](https://raw.githubusercontent.com/NodeMedia/iShow-RN/master/1519740855033.gif)
