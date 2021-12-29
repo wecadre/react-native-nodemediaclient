@@ -1,11 +1,14 @@
 {
-  "name": "Injex/react-native-nodemediaclient",
+  "name": "injex/react-native-nodemediaclient",
   "version": "0.2.6",
   "description": "This project is the react-native packaging of NodeMediaClient-Android and NodeMediaClient-iOS SDK.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Pavel Egerev",
+  "author": {
+            "name": "Injex",
+            "email": "info@injex.ru"
+        }
   "license": ""
 }
