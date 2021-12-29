@@ -34,6 +34,10 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     private static final String COMMAND_SWITCH_CAM_NAME = "switchCamera";
     private static final int COMMAND_SWITCH_FLASH_ID = 5;
     private static final String COMMAND_SWITCH_FLASH_NAME = "flashEnable";
+    private static final int COMMAND_AUDIO_ENABLE_ID = 6;
+    private static final String COMMAND_AUDIO_ENABLE_NAME = "audioEnable";
+    private static final int COMMAND_SET_ZOOM_SCALE_ID = 7;
+    private static final String COMMAND_SET_ZOOM_SCALE_NAME = "zoomScale";
 
     @Override
     public String getName() {
@@ -98,6 +102,16 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
         view.setDynamicRateEnable(dynamicRateEnable);
     }
 
+    @ReactProp(name = "audioEnable")
+    public void setAudioEnable(RCTNodeCameraView view, boolean audioEnable) {
+        view.setAudioEnable(audioEnable);
+    }
+
+    @ReactProp(name = "zoomScale")
+    public void setZoomScale(RCTNodeCameraView view, int level) {
+        view.setZoomScale(level);
+    }
+
     @ReactProp(name = "smoothSkinLevel")
     public void setSmoothSkinLevel(RCTNodeCameraView view, int level) {
         view.setSmoothSkinLevel(level);
@@ -113,7 +127,7 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     public Map<String, Integer> getCommandsMap() {
         return MapBuilder.of(COMMAND_STARTPREV_NAME, COMMAND_STARTPREV_ID, COMMAND_STOPPREV_NAME, COMMAND_STOPPREV_ID,
                 COMMAND_START_NAME, COMMAND_START_ID, COMMAND_STOP_NAME, COMMAND_STOP_ID, COMMAND_SWITCH_CAM_NAME,
-                COMMAND_SWITCH_CAM_ID, COMMAND_SWITCH_FLASH_NAME, COMMAND_SWITCH_FLASH_ID);
+                COMMAND_SWITCH_CAM_ID, COMMAND_SWITCH_FLASH_NAME, COMMAND_SWITCH_FLASH_ID,COMMAND_SET_ZOOM_SCALE_NAME, COMMAND_SET_ZOOM_SCALE_ID);
     }
 
     @Override
@@ -136,6 +150,12 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
                 break;
             case COMMAND_SWITCH_FLASH_ID:
                 root.setFlashEnable(args.getBoolean(0));
+                break;
+            case COMMAND_AUDIO_ENABLE_ID:
+                root.setAudioEnable(args.getBoolean(0));
+                break;
+            case COMMAND_SET_ZOOM_SCALE_ID:
+                root.setZoomScale(args.getInt(0));
                 break;
         }
     }

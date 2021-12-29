@@ -43,7 +43,9 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     private boolean denoise = false;
     private boolean dynamicRateEnable = true;
+    private boolean audioEnable = true;
     private int smoothSkinLevel = 0;
+    private int zoomScale = 0;
 
 
     public RCTNodeCameraView(@NonNull ThemedReactContext context) {
@@ -102,8 +104,17 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
         mNodePublisher.setDynamicRateEnable(dynamicRateEnable);
     }
 
+    public void setAudioEnable(boolean audioEnable) {
+        this.audioEnable = audioEnable;
+        mNodePublisher.setAudioEnable(audioEnable);
+    }
+
     public void setSmoothSkinLevel(int smoothSkinLevel) {
         this.smoothSkinLevel = smoothSkinLevel;
+    }
+    public void setZoomScale(int zoomScale) {
+        this.zoomScale = zoomScale;
+        mNodePublisher.setZoomScale(zoomScale);
     }
 
     public int startPrev() {
