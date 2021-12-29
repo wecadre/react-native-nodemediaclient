@@ -1,5 +1,5 @@
 {
-  "name": "injex/react-native-nodemediaclient",
+  "name": "Injex/react-native-nodemediaclient",
   "version": "0.2.5",
   "description": "This project is the react-native packaging of NodeMediaClient-Android and NodeMediaClient-iOS SDK.",
   "main": "index.js",
