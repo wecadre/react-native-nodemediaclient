@@ -29,6 +29,15 @@ declare module "react-native-nodemediaclient" {
     onStatus?(code?: OutputStreamStatus, status?: string): any;
   }
 
+  /** enter in picture-in-picture mode */
+  export type enterPip = () => any;
+
+  interface UsePip {
+    enterPip: enterPip;
+    isInPipMode: boolean;
+  }
+
+  export function usePip(): UsePip;
   export interface NodeCameraViewType {
     /** Stop streaming */
     stop(): any;
@@ -36,6 +45,7 @@ declare module "react-native-nodemediaclient" {
     start(): any;
     /** Switch front or back camera */
     switchCamera(): any;
+
     /** Enable or disable flash */
     flashEnable(enable?: boolean): any;
     /** Start camera preview */

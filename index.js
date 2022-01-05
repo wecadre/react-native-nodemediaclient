@@ -6,11 +6,12 @@
 //
 import NodeCameraView from "./NodeCameraModule";
 import NodePlayerView from "./NodePlayerModule";
-import { NativeModules } from "react-native";
+import * as Pip from "./Pip";
+
 module.exports = {
   NodeCameraView,
   NodePlayerView,
-  NodeMediaClient: NativeModules.NodeMediaClient,
+  ...Pip,
   OutputStreamStatus: {
     Connecting: 2000,
     Start: 2001,
