@@ -50,6 +50,7 @@ public class NodePlayerViewManager extends ViewGroupManager<RCTNodePlayerView> {
     public void setBufferTime(RCTNodePlayerView view, int bufferTime) {
         view.setBufferTime(bufferTime);
     }
+
     @ReactProp(name = "maxBufferTime")
     public void setMaxBufferTime(RCTNodePlayerView view, int bufferTime) {
         view.setMaxBufferTime(bufferTime);
@@ -67,7 +68,7 @@ public class NodePlayerViewManager extends ViewGroupManager<RCTNodePlayerView> {
 
     @ReactProp(name = "autoplay")
     public void setAutoPlay(RCTNodePlayerView view, Boolean autoPlay) {
-        if(autoPlay) {
+        if (autoPlay) {
             view.autoPlay();
         }
     }
@@ -86,9 +87,9 @@ public class NodePlayerViewManager extends ViewGroupManager<RCTNodePlayerView> {
     @Override
     public Map<String, Integer> getCommandsMap() {
         return MapBuilder.of(
-                COMMAND_PAUSE_NAME,COMMAND_PAUSE_ID,
-                COMMAND_START_NAME,COMMAND_START_ID,
-                COMMAND_STOP_NAME,COMMAND_STOP_ID
+                COMMAND_PAUSE_NAME, COMMAND_PAUSE_ID,
+                COMMAND_START_NAME, COMMAND_START_ID,
+                COMMAND_STOP_NAME, COMMAND_STOP_ID
         );
     }
 

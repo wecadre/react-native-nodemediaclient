@@ -47,7 +47,7 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
 
     public void setInputUrl(String inputUrl) {
         mNodePlayer.setInputUrl(inputUrl);
-        if(isAutoPlay) {
+        if (isAutoPlay) {
             start();
         }
     }
@@ -66,7 +66,7 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
     }
 
     public void setRenderType(String stype) {
-        NodePlayerView.RenderType type =  NodePlayerView.RenderType.valueOf(stype);
+        NodePlayerView.RenderType type = NodePlayerView.RenderType.valueOf(stype);
         setRenderType(type);
     }
 
@@ -74,7 +74,7 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
         mNodePlayer.setCryptoKey(key);
     }
 
-    public void setAudioEnable(Boolean audioEnable){
+    public void setAudioEnable(Boolean audioEnable) {
         mNodePlayer.setAudioEnable(audioEnable);
     }
 
@@ -90,7 +90,7 @@ public class RCTNodePlayerView extends NodePlayerView implements LifecycleEventL
         return mNodePlayer.stop();
     }
 
-    public void release(){
+    public void release() {
         mNodePlayer.release();
     }
 

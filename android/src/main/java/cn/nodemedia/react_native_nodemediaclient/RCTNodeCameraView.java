@@ -25,9 +25,10 @@ import cn.nodemedia.NodePublisher;
 import cn.nodemedia.NodePublisherDelegate;
 
 public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventListener {
+    private final ThemedReactContext reactContext;
     private NodePublisher mNodePublisher;
     private Boolean isAutoPreview = true;
-
+    String TAG = "LIFECYCLE";
     private int cameraId = -1;
     private boolean cameraFrontMirror = true;
 
@@ -44,31 +45,36 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
     private boolean denoise = false;
     private boolean dynamicRateEnable = true;
     private int smoothSkinLevel = 0;
+    private String outputUrl;
 
 
     public RCTNodeCameraView(@NonNull ThemedReactContext context) {
         super(context);
         setupLayoutHack();
         context.addLifecycleEventListener(this);
+        this.reactContext = context;
 
-        mNodePublisher = new NodePublisher(context, RCTNodeMediaClient.getLicense());
-        mNodePublisher.setNodePublisherDelegate(new NodePublisherDelegate() {
-            @Override
-            public void onEventCallback(NodePublisher nodePublisher, int i, String s) {
-                WritableMap event = Arguments.createMap();
-                event.putInt("code", i);
-                event.putString("msg", s);
-                ReactContext reactContext = (ReactContext) getContext();
-                reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
-                        getId(),
-                        "topChange",
-                        event);
-            }
-        });
+        mNodePublisher = ((ReactPipActivity) reactContext.getCurrentActivity()).getPublisher(reactContext);
+        mNodePublisher.setNodePublisherDelegate(getDelegate());
 
     }
 
+    @NonNull
+    private NodePublisherDelegate getDelegate() {
+        return (nodePublisher, i, s) -> {
+            WritableMap event = Arguments.createMap();
+            event.putInt("code", i);
+            event.putString("msg", s);
+            ReactContext reactContext = (ReactContext) getContext();
+            reactContext.getJSModule(RCTEventEmitter.class).receiveEvent(
+                    getId(),
+                    "topChange",
+                    event);
+        };
+    }
+
     public void setOutputUrl(String url) {
+        this.outputUrl = url;
         mNodePublisher.setOutputUrl(url);
     }
 
@@ -79,17 +85,18 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
     public void setCamera(int cameraId, boolean cameraFrontMirror) {
         this.cameraId = cameraId;
         this.cameraFrontMirror = cameraFrontMirror;
+
         mNodePublisher.setCameraPreview(this, cameraId, cameraFrontMirror);
-        if(isAutoPreview) {
+        if (isAutoPreview) {
             this.startPrev();
         }
     }
 
-    public void setAudio(int audioBitrate, int audioProfile,int audioSamplerate) {
+    public void setAudio(int audioBitrate, int audioProfile, int audioSamplerate) {
         mNodePublisher.setAudioParam(audioBitrate, audioProfile, audioSamplerate);
     }
 
-    public void setVideo(int videoPreset, int videoFPS, int videoBitrate, int videoProfile, boolean videoFrontMirror ) {
+    public void setVideo(int videoPreset, int videoFPS, int videoBitrate, int videoProfile, boolean videoFrontMirror) {
         mNodePublisher.setVideoParam(videoPreset, videoFPS, videoBitrate, videoProfile, videoFrontMirror);
     }
 
@@ -116,12 +123,19 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
         return mNodePublisher.stopPreview();
     }
 
+    void setShouldEnterPip(boolean shouldEnterPip) throws NullPointerException {
+        ReactPipActivity activity = (ReactPipActivity) reactContext.getCurrentActivity();
+        activity.setShouldEnterPip(shouldEnterPip);
+    }
+
     public int start() {
+        setShouldEnterPip(true);
         return mNodePublisher.start();
     }
 
     public void stop() {
         mNodePublisher.stop();
+        setShouldEnterPip(false);
     }
 
     public int switchCam() {
@@ -130,7 +144,7 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     public void audioPreview() {
         isAutoPreview = true;
-        if(cameraId >=0) {
+        if (cameraId >= 0) {
             this.startPrev();
         }
 
@@ -138,15 +152,17 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     @Override
     public void onHostResume() {
+        Log.d(TAG, "onHostResume: ");
     }
 
     @Override
     public void onHostPause() {
-
+        Log.d(TAG, "onHostPause: on ");
     }
 
     @Override
     public void onHostDestroy() {
+        Log.d(TAG, "onHostDestroy: ");
         mNodePublisher.stopPreview();
         mNodePublisher.stop();
     }

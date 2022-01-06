@@ -7,7 +7,7 @@
 
 package cn.nodemedia.react_native_nodemediaclient;
 
-import android.util.Log;
+import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
@@ -19,6 +19,7 @@ import com.facebook.react.uimanager.annotations.ReactProp;
 import java.util.Map;
 
 import javax.annotation.Nullable;
+
 
 public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
 
@@ -34,6 +35,9 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     private static final String COMMAND_SWITCH_CAM_NAME = "switchCamera";
     private static final int COMMAND_SWITCH_FLASH_ID = 5;
     private static final String COMMAND_SWITCH_FLASH_NAME = "flashEnable";
+    private ThemedReactContext reactContext;
+    private RCTNodeCameraView view;
+
 
     @Override
     public String getName() {
@@ -54,9 +58,12 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
 
     @Override
     protected RCTNodeCameraView createViewInstance(ThemedReactContext reactContext) {
+        this.reactContext = reactContext;
         RCTNodeCameraView view = new RCTNodeCameraView(reactContext);
+        this.view = view;
         return view;
     }
+
 
     @ReactProp(name = "outputUrl")
     public void setOutputUrl(RCTNodeCameraView view, @Nullable String outputUrl) {
@@ -70,6 +77,13 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
         } else {
             view.stopPrev();
         }
+    }
+
+    @Override
+    public void onDropViewInstance(@NonNull RCTNodeCameraView view) {
+        super.onDropViewInstance(view);
+        view.stopPrev();
+        view.stop();
     }
 
     @ReactProp(name = "camera")

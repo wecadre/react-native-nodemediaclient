@@ -17,7 +17,7 @@ import java.util.Collections;
 import java.util.List;
 
 
-public class NodeMediaReactPackage implements ReactPackage{
+public class NodeMediaReactPackage implements ReactPackage {
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         return Arrays.<NativeModule>asList(
