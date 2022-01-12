@@ -1,9 +1,12 @@
 package cn.nodemedia;
 
+import static android.content.ContentValues.TAG;
+
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.media.AudioManager;
+import android.util.Log;
 import android.view.WindowManager;
 
 import java.nio.ByteBuffer;
@@ -13,8 +16,7 @@ import java.util.List;
 /**
  * Created by ${$USER_NAME} on 17/4/11.
  */
-
-public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
+public class NodePublisher implements NodeCameraViewX.NodeCameraViewCallback {
     static {
         System.loadLibrary("NodeMediaClient");
     }
@@ -25,7 +27,7 @@ public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
     private NodePublisherAudioRawDelegate mNodePublisherAudioRawDelegate;
     private NodePublisherVideoTextureDelegate mNodePublisherVideoTextureDelegate;
     private CapturePictureListener mCapturePictureListener;
-    private NodeCameraView mNodeCameraView;
+    private NodeCameraViewX mNodeCameraView;
     private static AudioManager.OnAudioFocusChangeListener sAudioFocusChangeListener = null;
     private static List<NodePublisher> publishers = new ArrayList<>(0);
 
@@ -160,7 +162,7 @@ public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
         this.connArgs = connArgs;
     }
 
-    public void setCameraPreview(NodeCameraView cameraPreview, int cameraID, boolean frontMirror) {
+    public void setCameraPreview(NodeCameraViewX cameraPreview, int cameraID, boolean frontMirror) {
         mNodeCameraView = cameraPreview;
         mNodeCameraView.setNodeCameraViewCallback(this);
         cameraId = cameraID;
@@ -189,6 +191,7 @@ public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
     }
 
     public int startPreview() {
+        Log.d("TAG", "startPreview: from nodePublisher");
         if (mNodeCameraView == null) {
             return -1;
         }
@@ -342,11 +345,13 @@ public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
         if (this.mNodePublisherVideoTextureDelegate != null) {
             this.mNodePublisherVideoTextureDelegate.onCreateTextureCallback(this);
         }
+        Log.d(TAG, "OnCreate: NODE PUBLISHER");
         jniInitGPUImage();
     }
 
     @Override
     public void OnChange(int cameraWidth, int cameraHeight, int surfaceWidth, int surfaceHeight) {
+        Log.d(TAG, "OnChange: NODE PUBLISHER");
         this.cameraOri = mNodeCameraView.getCameraOrientation();
         this.surfaceOri = getWindowRotation();
         this.cameraWidth = cameraWidth;
@@ -360,6 +365,7 @@ public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
 
     @Override
     public void OnDraw(int textureId) {
+
         if (this.mNodePublisherVideoTextureDelegate != null) {
             textureId = this.mNodePublisherVideoTextureDelegate.onDrawTextureCallback(this, textureId, this.cameraWidth, this.cameraHeight,
                     this.isFrontCamera, this.cameraOri);
@@ -369,6 +375,7 @@ public class NodePublisher implements NodeCameraView.NodeCameraViewCallback {
 
     @Override
     public void OnDestroy() {
+        Log.d(TAG, "OnDestroy: NODE PUBLISHER");
         if (this.mNodePublisherVideoTextureDelegate != null) {
             this.mNodePublisherVideoTextureDelegate.onDestroyTextureCallback(this);
         }

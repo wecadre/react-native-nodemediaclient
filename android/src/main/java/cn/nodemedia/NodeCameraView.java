@@ -6,15 +6,19 @@ import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.Parameters;
+import android.hardware.camera2.CameraManager;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Build;
+import android.os.Handler;
+
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.SurfaceHolder;
 import android.widget.FrameLayout;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.microedition.khronos.egl.EGLConfig;
@@ -23,11 +27,14 @@ import javax.microedition.khronos.opengles.GL10;
 import static cn.nodemedia.NodePublisher.CAMERA_BACK;
 import static cn.nodemedia.NodePublisher.CAMERA_FRONT;
 
+import com.facebook.react.uimanager.ThemedReactContext;
+
+import cn.nodemedia.react_native_nodemediaclient.ReactPipActivity;
+
 
 /**
  * Created by Mingliang Chen on 17/3/6.
  */
-
 public class NodeCameraView extends FrameLayout implements GLSurfaceView.Renderer, SurfaceHolder.Callback, SurfaceTexture.OnFrameAvailableListener {
     private static final String TAG = "NodeMedia.CameraView";
     public static final int NO_TEXTURE = -1;
@@ -46,34 +53,87 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
     private int mCameraHeight = 1080;
     private int mSurfaceWidth;
     private int mSurfaceHeight;
-    private NodeCameraViewCallback mNodeCameraViewCallback;
     private boolean isMediaOverlay = false;
+    private boolean appInBackground;
 
-    public NodeCameraView(Context context) {
+    Handler cameraEventHandler = new Handler();
+    CameraManager cameraManager;
+
+    private NodeCameraViewCallback mNodeCameraViewCallback;
+    private String cameraAvailable;
+    private boolean inPipMode;
+    private ReactPipActivity mainActivity;
+
+
+    public NodeCameraView(ThemedReactContext context) {
         super(context);
         initView(context);
     }
 
-    public NodeCameraView(Context context, AttributeSet attrs) {
+    public NodeCameraView(ThemedReactContext context, AttributeSet attrs) {
         super(context, attrs);
         initView(context);
     }
 
-    public NodeCameraView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public NodeCameraView(ThemedReactContext context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public NodeCameraView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public NodeCameraView(ThemedReactContext context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         initView(context);
     }
 
 
-    private void initView(Context context) {
+    private void initView(ThemedReactContext context) {
+
         mContext = context;
         mCameraNum = Camera.getNumberOfCameras();
+        ReactPipActivity activity = (ReactPipActivity) context.getCurrentActivity();
+        mainActivity = activity;
+        assert activity != null;
+
+
+        initCameraManager(activity);
+
+
+    }
+
+
+    void initCameraManager(ReactPipActivity activity) {
+
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            cameraManager = (CameraManager) activity.getSystemService(Context.CAMERA_SERVICE);
+
+
+            cameraManager.registerAvailabilityCallback(new CameraManager.AvailabilityCallback() {
+
+
+                @Override
+                public void onCameraAvailable(String cameraId) {
+                    super.onCameraAvailable(cameraId);
+                    if (!appInBackground) {
+                        cameraAvailable = cameraId;
+                        mainActivity.sendEvent(CameraEvents.STATE_CHANGE, CameraEvents.EVENT_AVAILABLE);
+                    }
+
+                }
+
+                @Override
+                public void onCameraUnavailable(String cameraId) {
+                    super.onCameraUnavailable(cameraId);
+                    if (appInBackground) {
+                        cameraAvailable = null;
+                        mainActivity.sendEvent(CameraEvents.STATE_CHANGE, CameraEvents.EVENT_UNAVAILABLE);
+                    }
+                }
+            }, cameraEventHandler);
+
+        }
+
     }
 
     private void createTexture() {
@@ -105,6 +165,7 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
     }
 
     public int startPreview(int cameraId) {
+
         if (isStarting) return -1;
         try {
             mCameraId = cameraId > mCameraNum - 1 ? 0 : cameraId;
@@ -119,6 +180,7 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
             setAutoFocus(this.isAutoFocus);
         } catch (Exception e) {
             Log.w(TAG, "startPreview setParameters:" + e.getMessage());
+            return -1;
         }
 
         mGLSurfaceView = new GLSurfaceView(mContext);
@@ -136,12 +198,10 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
     public int stopPreview() {
         if (!isStarting) return -1;
         isStarting = false;
-        mGLSurfaceView.queueEvent(new Runnable() {
-            @Override
-            public void run() {
-                if (mNodeCameraViewCallback != null) {
-                    mNodeCameraViewCallback.OnDestroy();
-                }
+
+        mGLSurfaceView.queueEvent(() -> {
+            if (mNodeCameraViewCallback != null) {
+                mNodeCameraViewCallback.OnDestroy();
             }
         });
         removeView(mGLSurfaceView);
@@ -155,6 +215,7 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         return 0;
     }
 
@@ -191,7 +252,7 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
         if (ppsfv != null) {
             this.mCameraWidth = ppsfv.width;
             this.mCameraHeight = ppsfv.height;
-            Log.d(TAG, "Camera preferred preview size for video is " + ppsfv.width + "x" + ppsfv.height);
+
             parms.setPreviewSize(this.mCameraWidth, this.mCameraHeight);
         }
     }
@@ -262,6 +323,7 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
         try {
             mCamera = Camera.open(mCameraId);
         } catch (RuntimeException e) {
+            e.printStackTrace();
             return -2;
         }
 
@@ -315,16 +377,24 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
             if (mNodeCameraViewCallback != null) {
                 mNodeCameraViewCallback.OnChange(mCameraWidth, mCameraHeight, mSurfaceWidth, mSurfaceHeight);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
+
             e.printStackTrace();
+            mainActivity.sendEvent(CameraEvents.STATE_CHANGE, CameraEvents.EVENT_ERROR);
+
         }
     }
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        mSurfaceTexture.updateTexImage();
-        if (mNodeCameraViewCallback != null) {
-            mNodeCameraViewCallback.OnDraw(mTextureId);
+        try {
+
+            mSurfaceTexture.updateTexImage();
+            if (mNodeCameraViewCallback != null) {
+                mNodeCameraViewCallback.OnDraw(mTextureId);
+            }
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
         }
     }
 
@@ -392,4 +462,14 @@ public class NodeCameraView extends FrameLayout implements GLSurfaceView.Rendere
 
         return texture[0];
     }
+
+
+}
+
+class CameraEvents {
+    public static final String EVENT_ERROR = "error";
+    public static final String EVENT_AVAILABLE = "available";
+    public static final String EVENT_UNAVAILABLE = "unavailable";
+    public static final String STATE_CHANGE = "onStateChange";
+
 }

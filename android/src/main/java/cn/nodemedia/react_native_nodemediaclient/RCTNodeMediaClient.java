@@ -4,6 +4,10 @@ package cn.nodemedia.react_native_nodemediaclient;
  * Created by aliang on 2018/2/28.
  */
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import com.facebook.react.bridge.ReactApplicationContext;
 
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
@@ -55,6 +59,7 @@ public class RCTNodeMediaClient extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setShouldEnterPip(Boolean shouldEnter) {
+        Log.d(TAG, "setShouldEnterPip: called" + shouldEnter);
         ReactPipActivity activity = (ReactPipActivity) getCurrentActivity();
         activity.setShouldEnterPip(shouldEnter);
     }

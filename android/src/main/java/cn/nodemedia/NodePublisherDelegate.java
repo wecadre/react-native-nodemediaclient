@@ -1,5 +1,5 @@
 package cn.nodemedia;
-
+import cn.nodemedia.NodePublisher;
 /**
  * Created by ${$USER_NAME} on 17/4/19.
  */

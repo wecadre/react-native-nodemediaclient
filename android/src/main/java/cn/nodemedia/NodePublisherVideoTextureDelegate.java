@@ -1,4 +1,5 @@
 package cn.nodemedia;
+import cn.nodemedia.NodePublisher;
 
 public interface NodePublisherVideoTextureDelegate {
     void onCreateTextureCallback(NodePublisher streamer);

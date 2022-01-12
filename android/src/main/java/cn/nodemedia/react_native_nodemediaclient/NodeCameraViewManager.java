@@ -7,11 +7,16 @@
 
 package cn.nodemedia.react_native_nodemediaclient;
 
+import static android.content.ContentValues.TAG;
+
+import android.util.Log;
+
 import androidx.annotation.NonNull;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.common.MapBuilder;
+import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.ViewGroupManager;
 import com.facebook.react.uimanager.annotations.ReactProp;
@@ -21,7 +26,7 @@ import java.util.Map;
 import javax.annotation.Nullable;
 
 
-public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
+public class NodeCameraViewManager extends SimpleViewManager<RCTNodeCameraView> {
 
     private static final int COMMAND_STARTPREV_ID = 0;
     private static final String COMMAND_STARTPREV_NAME = "startprev";
@@ -35,9 +40,6 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     private static final String COMMAND_SWITCH_CAM_NAME = "switchCamera";
     private static final int COMMAND_SWITCH_FLASH_ID = 5;
     private static final String COMMAND_SWITCH_FLASH_NAME = "flashEnable";
-    private ThemedReactContext reactContext;
-    private RCTNodeCameraView view;
-
 
     @Override
     public String getName() {
@@ -51,16 +53,10 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
                 .build();
     }
 
-    @Override
-    public boolean needsCustomLayoutForChildren() {
-        return true;
-    }
 
     @Override
     protected RCTNodeCameraView createViewInstance(ThemedReactContext reactContext) {
-        this.reactContext = reactContext;
         RCTNodeCameraView view = new RCTNodeCameraView(reactContext);
-        this.view = view;
         return view;
     }
 
@@ -72,7 +68,8 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
 
     @ReactProp(name = "autopreview")
     public void setAutoPreview(RCTNodeCameraView view, @Nullable Boolean autoPreview) {
-        if (autoPreview == true) {
+        Log.d(TAG, "setAutoPreview: "+ autoPreview);
+        if (autoPreview) {
             view.audioPreview();
         } else {
             view.stopPrev();
@@ -134,6 +131,7 @@ public class NodeCameraViewManager extends ViewGroupManager<RCTNodeCameraView> {
     public void receiveCommand(RCTNodeCameraView root, int commandId, @Nullable ReadableArray args) {
         switch (commandId) {
             case COMMAND_STARTPREV_ID:
+                Log.d("TAG", "receiveCommand: start preview");
                 root.startPrev();
                 break;
             case COMMAND_STOPPREV_ID:

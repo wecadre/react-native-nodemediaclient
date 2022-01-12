@@ -20,14 +20,13 @@ import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
 
-import cn.nodemedia.NodeCameraView;
+import cn.nodemedia.NodeCameraViewX;
 import cn.nodemedia.NodePublisher;
-import cn.nodemedia.NodePublisherDelegate;
 
-public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventListener {
+public class RCTNodeCameraView extends NodeCameraViewX implements LifecycleEventListener {
     private final ThemedReactContext reactContext;
     private NodePublisher mNodePublisher;
-    private Boolean isAutoPreview = true;
+    private Boolean isAutoPreview = false;
     String TAG = "LIFECYCLE";
     private int cameraId = -1;
     private boolean cameraFrontMirror = true;
@@ -60,7 +59,7 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
     }
 
     @NonNull
-    private NodePublisherDelegate getDelegate() {
+    private cn.nodemedia.NodePublisherDelegate getDelegate() {
         return (nodePublisher, i, s) -> {
             WritableMap event = Arguments.createMap();
             event.putInt("code", i);
@@ -115,6 +114,8 @@ public class RCTNodeCameraView extends NodeCameraView implements LifecycleEventL
 
     public int startPrev() {
         int result = mNodePublisher.startPreview();
+        Log.d(TAG, "startPrev: on RCT_NODE_CAMERA_VIEW "+result );
+
         return result;
     }
 
