@@ -5,7 +5,7 @@
 //  Copyright © 2017年 NodeMedia. All rights reserved.
 //
 
-package cn.nodemedia.react_native_nodemediaclient;
+package br.app.alive.rtmp_stream;
 
 import android.util.Log;
 import android.view.Choreographer;

@@ -1,4 +1,4 @@
-package cn.nodemedia.react_native_nodemediaclient;
+package br.app.alive.rtmp_stream;
 
 import android.content.Context;
 import androidx.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("cn.nodemedia.react_native_nodemediaclient.test", appContext.getPackageName());
+        assertEquals("br.app.alive.rtmp_stream.test", appContext.getPackageName());
     }
 }

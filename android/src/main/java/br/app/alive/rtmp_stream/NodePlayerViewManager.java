@@ -5,7 +5,7 @@
 //  Copyright © 2017年 NodeMedia. All rights reserved.
 //
 
-package cn.nodemedia.react_native_nodemediaclient;
+package br.app.alive.rtmp_stream;
 
 import com.facebook.react.bridge.ReadableArray;
 import com.facebook.react.common.MapBuilder;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import javax.annotation.Nullable;
 
-import cn.nodemedia.react_native_nodemediaclient.RCTNodePlayerView;
+import br.app.alive.rtmp_stream.RCTNodePlayerView;
 
 public class NodePlayerViewManager extends ViewGroupManager<RCTNodePlayerView> {
 

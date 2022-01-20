@@ -1,4 +1,4 @@
-package cn.nodemedia.react_native_nodemediaclient;
+package br.app.alive.rtmp_stream;
 
 /**
  * Created by aliang on 2018/2/28.

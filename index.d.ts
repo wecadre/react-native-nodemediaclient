@@ -1,4 +1,4 @@
-declare module "react-native-nodemediaclient" {
+declare module "react-native-rtmp-stream" {
   import type * as React from "react";
   import { ViewProps } from "react-native";
 

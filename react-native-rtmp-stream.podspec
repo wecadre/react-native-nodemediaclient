@@ -3,13 +3,13 @@ require "json"
 package = JSON.parse(File.read(File.join(__dir__, "package.json")))
 
 Pod::Spec.new do |s|
-  s.name           = 'react-native-nodemediaclient'
+  s.name           = 'react-native-rtmp-stream'
   s.version        = package['version']
   s.summary        = package['description']
   s.description    = package['description']
   s.author         = package['author']
-  s.homepage       = 'https://github.com/NodeMedia/react-native-nodemediaclient'
-  s.source       = { :git => "https://github.com/NodeMedia/react-native-nodemediaclient.git", :tag => "master" }
+  s.homepage       = 'https://github.com/Alive-App/react-native-rtmp-stream'
+  s.source       = { :git => "hhttps://github.com/Alive-App/react-native-rtmp-stream.git", :tag => "master" }
 
   s.ios.deployment_target = "8.0"
 
