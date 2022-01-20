@@ -1,2 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="cn.nodemedia.react_native_nodemediaclient"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="br.app.alive.rtmp_stream"/>

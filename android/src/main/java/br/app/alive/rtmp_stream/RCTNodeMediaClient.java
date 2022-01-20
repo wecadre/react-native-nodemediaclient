@@ -1,12 +1,8 @@
-package br.app.alive.rtmp_stream;;
+package br.app.alive.rtmp_stream;
 
 /**
  * Created by aliang on 2018/2/28.
  */
-
-import static android.content.ContentValues.TAG;
-
-import android.util.Log;
 
 import com.facebook.react.bridge.ReactApplicationContext;
 
@@ -43,6 +39,8 @@ public class RCTNodeMediaClient extends ReactContextBaseJavaModule {
         ReactPipActivity activity = (ReactPipActivity) reactContext.getCurrentActivity();
         assert activity != null;
 
+        nodePublisher = activity.getPublisher(reactContext);
+        nodePublisher.stop();
     }
 
     public static String getLicense() {
@@ -57,7 +55,6 @@ public class RCTNodeMediaClient extends ReactContextBaseJavaModule {
 
     @ReactMethod
     public void setShouldEnterPip(Boolean shouldEnter) {
-        Log.d(TAG, "setShouldEnterPip: called" + shouldEnter);
         ReactPipActivity activity = (ReactPipActivity) getCurrentActivity();
         activity.setShouldEnterPip(shouldEnter);
     }

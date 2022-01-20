@@ -1,4 +1,4 @@
-declare module "react-native-nodemediaclient" {
+declare module "react-native-rtmp-stream" {
   import type * as React from "react";
   import { ViewProps } from "react-native";
 
@@ -30,12 +30,12 @@ declare module "react-native-nodemediaclient" {
   }
 
   /** set if should enter in picture-in-picture mode when exit app */
-  export function setShouldEnterPip (shouldEnter:boolean): any;
+  export function setShouldEnterPip(shouldEnter: boolean): any;
   /** enter in picture-in-picture mode */
-  export function enterPip () :any;
+  export function enterPip(): any;
 
   interface UsePip {
-    enterPip: enterPip;
+    enterPip(shouldEnter: boolean): any;
     isInPipMode: boolean;
   }
 
