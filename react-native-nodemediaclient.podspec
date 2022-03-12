@@ -8,8 +8,8 @@ Pod::Spec.new do |s|
   s.summary        = package['description']
   s.description    = package['description']
   s.author         = package['author']
-  s.homepage       = 'https://github.com/NodeMedia/react-native-nodemediaclient'
-  s.source       = { :git => "https://github.com/NodeMedia/react-native-nodemediaclient.git", :tag => "master" }
+  s.homepage       = 'https://github.com/wecadre/react-native-nodemediaclient'
+  s.source       = { :git => "https://github.com/wecadre/react-native-nodemediaclient.git", :tag => "master" }
 
   s.ios.deployment_target = "8.0"
 

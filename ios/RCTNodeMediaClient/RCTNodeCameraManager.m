@@ -28,7 +28,9 @@ RCT_EXPORT_VIEW_PROPERTY(audio, NSDictionary);
 RCT_EXPORT_VIEW_PROPERTY(video, NSDictionary);
 RCT_EXPORT_VIEW_PROPERTY(denoise, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(dynamicRateEnable, BOOL);
+RCT_EXPORT_VIEW_PROPERTY(audioEnable, BOOL);
 RCT_EXPORT_VIEW_PROPERTY(smoothSkinLevel, int);
+RCT_EXPORT_VIEW_PROPERTY(zoomScale, int);
 RCT_EXPORT_VIEW_PROPERTY(cryptoKey, NSString)
 RCT_EXPORT_VIEW_PROPERTY(onChange, RCTBubblingEventBlock)
 
@@ -91,6 +93,16 @@ RCT_EXPORT_METHOD(flashEnable:(nonnull NSNumber *)reactTag enable:(BOOL)enable)
    ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTNodeCameraView *> *viewRegistry){
      RCTNodeCameraView *view = viewRegistry[reactTag];
      [view setFlashEnable:enable];
+   }];
+}
+
+RCT_EXPORT_METHOD(audioEnable:(nonnull NSNumber *)reactTag enable:(BOOL)enable)
+{
+
+  [self.bridge.uiManager addUIBlock:
+   ^(__unused RCTUIManager *uiManager, NSDictionary<NSNumber *, RCTNodeCameraView *> *viewRegistry){
+     RCTNodeCameraView *view = viewRegistry[reactTag];
+     [view setAudioEnable:enable];
    }];
 }
 

@@ -33,6 +33,15 @@ const NodeCameraView = (props, ref) => {
       );
   };
 
+  const audioEnable = (enable) => {
+    if (videoRef.current)
+      UIManager.dispatchViewManagerCommand(
+        findNodeHandle(videoRef.current),
+        UIManager.getViewManagerConfig("RCTNodeCamera")?.Commands?.audioEnable,
+        [enable]
+      );
+  };
+
   const startPreview = () => {
     if (videoRef.current)
       UIManager.dispatchViewManagerCommand(
@@ -68,6 +77,7 @@ const NodeCameraView = (props, ref) => {
         null
       );
   };
+
   React.useImperativeHandle(
     ref,
     () => ({
@@ -75,10 +85,19 @@ const NodeCameraView = (props, ref) => {
       start,
       switchCamera,
       flashEnable,
+      audioEnable,
       startPreview,
       stopPreview,
     }),
-    [switchCamera, stop, start, flashEnable, startPreview, stopPreview]
+    [
+      stop,
+      start,
+      switchCamera,
+      flashEnable,
+      audioEnable,
+      startPreview,
+      stopPreview,
+    ]
   );
 
   React.useEffect(() => {

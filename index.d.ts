@@ -20,10 +20,16 @@ declare module "react-native-nodemediaclient" {
     denoise?: boolean;
     /** Enable dynamic bitrate for auto increase or decreate depending of connection */
     dynamicRateEnable?: boolean;
+    scaleMode?: "ScaleToFill" | "ScaleAspectFit" | "ScaleAspectFill";
+    renderType?: "SURFACEVIEW" | "TEXTUREVIEW";
     /** Level of smoothing skin 0 is disabled
      * @max 5
      */
     smoothSkinLevel?: number;
+    /** Level of zoom
+     * @max 5
+     */
+    zoomScale?: number;
     cryptoKey?: string;
     /** Called when streaming status has changed */
     onStatus?(code?: OutputStreamStatus, status?: string): any;
@@ -36,6 +42,8 @@ declare module "react-native-nodemediaclient" {
     start(): any;
     /** Switch front or back camera */
     switchCamera(): any;
+    /** Enable or disable audio */
+    audioEnable(): any;
     /** Enable or disable flash */
     flashEnable(enable?: boolean): any;
     /** Start camera preview */
