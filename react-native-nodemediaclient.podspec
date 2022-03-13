@@ -11,7 +11,7 @@ Pod::Spec.new do |s|
   s.homepage       = 'https://github.com/wecadre/react-native-nodemediaclient'
   s.source       = { :git => "https://github.com/wecadre/react-native-nodemediaclient.git", :tag => "master" }
 
-  s.ios.deployment_target = "8.0"
+  s.ios.deployment_target = "9.0"
 
   s.subspec "RCTNodeMediaClient" do |ss|
     ss.source_files  = "ios/RCTNodeMediaClient/*.{h,m}"
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
 
-  s.dependency "NodeMediaClient", '2.9.8'
+  s.dependency "NodeMediaClient", '~> 2.9.9'
 
   s.default_subspec = "RCTNodeMediaClient"
 end

@@ -1,12 +1,13 @@
 {
-  "name": "react-native-nodemediaclient",
-  "version": "0.5.0",
+  "name": "@wecadre/react-native-nodemediaclient",
+  "version": "0.3.0",
   "description": "This project is the react-native packaging of NodeMediaClient-Android and NodeMediaClient-iOS SDK.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish:github": "npm publish --registry=https://npm.pkg.github.com"
   },
-  "author": "Chen Mingliang",
-  "license": "",
+  "author": "wecadre",
+  "license": "MIT",
   "types": "index.d.ts"
 }
