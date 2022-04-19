@@ -97,8 +97,17 @@
   [_np setBeautyLevel:smoothSkinLevel];
 }
 
+- (void)setZoomScale:(NSInteger)zoomScale {
+  _zoomScale = zoomScale;
+  [_np setZoomScale:zoomScale];
+}
+
 - (void)setFlashEnable:(BOOL)flashEnable {
   [_np setFlashEnable:flashEnable];
+}
+
+- (void)setAudioEnable:(BOOL)audioEnable {
+  [_np setAudioEnable:audioEnable];
 }
 
 -(void)setCryptoKey:(NSString *)cryptoKey {
